@@ -49,6 +49,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('images.create')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>اختصاص عکس</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('images.index')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>نمایش عکس</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/isoblog/dashboard/comments/index.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>نظرات کاربران</p>

@@ -1,4 +1,5 @@
 @extends('dashboard.layout.master')
+@section('title','داشبورد')
 @include('dashboard.sidebar')
 @section('content')
 <!-- Content Wrapper. Contains page content -->

@@ -42,6 +42,7 @@
                         @endif
                             <!-- form start -->
                             <form role="form" method="post" action="{{route('categories.store')}}" >
+                                @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label  class="form-label">نام دسته بندی</label>

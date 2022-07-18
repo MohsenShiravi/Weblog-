@@ -19,7 +19,7 @@ class CategoryController extends Controller
         Category::query()->create([
             'title'=>$request->get('title'),
         ]);
-        return redirect()->route('dashboard.categories.index');
+        return redirect()->route('categories.index');
     }
 
     public function index()
@@ -37,11 +37,11 @@ class CategoryController extends Controller
     {
         $category->title=$request->title;
         $category->save();
-        return redirect()->route('dashboard.categories.index');
+        return redirect()->route('categories.index');
     }
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('dashboard.categories.index');
+        return redirect()->route('categories.index');
     }
 }

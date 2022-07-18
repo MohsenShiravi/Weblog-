@@ -41,21 +41,31 @@
                                         <th>محتوا </th>
                                         <th>دسته بندی</th>
                                         <th>وضعیت</th>
+                                        <th>نام نویسنده</th>
+                                        <th>jjده</th>
                                         <th>عملیات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($posts as $post)
+                                        @php
+                                        $url=$post->image->file;
+                                        $pic='storage/'.substr($url,'7');
+                                        @endphp
 
-                                        <tr>
+                           <tr>
                                             <td>{{ $loop->iteration}}</td>
                                             <td>{{$post->title}}</td>
                                             <td>{{$post->short_content}}</td>
                                             <td>{{$post->content}}</td>
 
                                             <td>{{$post->category->title}}</td>
-                                            h
+
                                             <td>{{$post->status}}</td>
+                                            <td>{{$post->user->name}}</td>
+
+                                            <td><img width="50px" height="40px" src="{{asset("$pic")}}"></td>
+
                                             <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
 
                                                 <a href="{{route('posts.destroy',['post'=> $post->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>

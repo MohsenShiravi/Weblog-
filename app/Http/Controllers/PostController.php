@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function show()
+    {
+        $posts = Post::all();
+        $categories = Category::all();
+        return view('index',['categories'=>$categories,'posts'=>$posts]);
+    }
 public function create()
 {
     $categories = Category::all();
@@ -24,11 +30,11 @@ public function create()
             'short_content'=>$request->get('short_content'),
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
-            'user_id'=>Auth::user(),
+            'user_id'=>Auth::id(),
             'status'=>$request->get('status'),
         ]);
         //$posts->tags()->attach($request->get('tags'));
-        return redirect()->route('dashboard.posts.index');
+        return redirect()->route('posts.index');
     }
 
     public function index()
@@ -53,13 +59,15 @@ public function create()
             'status'=>$request->get('status'),
         ]);
         //$post->tags()->sync($request->get('tags'));
-        return redirect()->route('dashboard.posts.index');
+        return redirect()->route('posts.index');
     }
     public function destroy(Post $post)
     {
+        $post->image()->detach();
         //$post->tags()->detach();
+
         $post->delete();
-        return redirect()->route('dashboard.posts.index');
+        return redirect()->route('posts.index');
     }
 }
 

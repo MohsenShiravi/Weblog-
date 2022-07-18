@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +16,19 @@ use App\Http\Controllers\PostController;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::get('/index',[IndexController::class,'index'])->name('index')->middleware(['auth'])->name('index');
+
 
 Route::prefix('categories')->group(function (){
     Route::get('/',[CategoryController::class,'index'])->name('categories.index');
@@ -40,5 +46,13 @@ Route::prefix('posts')->group(function (){
     Route::get('/edit/{post}',[PostController::class,'edit'])->name('posts.edit');
     Route::post('/update/{post}',[PostController::class,'update'])->name('posts.update');
     Route::get('/destroy/{post}',[PostController::class,'destroy'])->name('posts.destroy');
-    Route::get('/create',[PostController::class,'create'])->name('posts.create');
+
+});
+Route::prefix('images')->group(function (){
+    Route::get('/',[ImageController::class,'index'])->name('images.index');
+    Route::get('/create',[ImageController::class,'create'])->name('images.create');
+    Route::post('/store',[ImageController::class,'store'])->name('images.store');
+    Route::get('/edit/{image}',[ImageController::class,'edit'])->name('images.edit');
+    Route::post('/update/{image}',[ImageController::class,'update'])->name('images.update');
+    Route::get('/destroy/{image}',[ImageController::class,'destroy'])->name('images.destroy');
 });
