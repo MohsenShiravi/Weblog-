@@ -27,10 +27,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-Route::get('/index',[IndexController::class,'index'])->name('index')->middleware(['auth'])->name('index');
+    Route::get('/index', [IndexController::class, 'index'])->name('index');
+
+Route::get('/show/{post}', [IndexController::class, 'show'])->name('index.show');
 
 
-Route::prefix('categories')->group(function (){
+Route::prefix('categories')->middleware(['auth'])->group(function (){
     Route::get('/',[CategoryController::class,'index'])->name('categories.index');
     Route::get('/create',[CategoryController::class,'create'])->name('categories.create');
     Route::post('/store',[CategoryController::class,'store'])->name('categories.store');
@@ -39,7 +41,7 @@ Route::prefix('categories')->group(function (){
     Route::get('/destroy/{category}',[CategoryController::class,'destroy'])->name('categories.destroy');
 });
 
-Route::prefix('posts')->group(function (){
+Route::prefix('posts')->middleware(['auth'])->group(function (){
     Route::get('/',[PostController::class,'index'])->name('posts.index');
     Route::get('/create',[PostController::class,'create'])->name('posts.create');
     Route::post('/store',[PostController::class,'store'])->name('posts.store');
@@ -48,7 +50,7 @@ Route::prefix('posts')->group(function (){
     Route::get('/destroy/{post}',[PostController::class,'destroy'])->name('posts.destroy');
 
 });
-Route::prefix('images')->group(function (){
+Route::prefix('images')->middleware(['auth'])->group(function (){
     Route::get('/',[ImageController::class,'index'])->name('images.index');
     Route::get('/create',[ImageController::class,'create'])->name('images.create');
     Route::post('/store',[ImageController::class,'store'])->name('images.store');

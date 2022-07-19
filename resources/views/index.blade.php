@@ -130,6 +130,9 @@
                                 <li class="active">
                                     <a href="index.html">صفحه اصلی</a>
                                 </li>
+                                <li class="active">
+                                    <a href="/dashboard">داشبورد</a>
+                                </li>
                             </ul> <!-- end menu -->
                         </nav> <!-- end nav-wrap -->
 
@@ -170,26 +173,32 @@
                     <h1 class="page-title">نمایش پست ها</h1>
                     @foreach($posts as $post)
                         @php
-                            $url=$post->image->file;
-                            $pic='storage/'.substr($url,'7');
+                            $urlp=$post->image->file;
+                            $picpost='storage/'.substr($urlp,'7');
+                            $upic=$post->user->image->file;
+                            $picuser='storage/'.substr($upic,'7');
                         @endphp
                         <article class="entry card post-list">
-                            <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{asset("$pic")}})">
-                                <a href="single-post.html" class="thumb-url"></a>
-                                <img src="{{asset("storage/images/image147-min-1089984970_1658178095.jpg")}}" alt="" class="entry__img d-none">
+                            <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{asset("$picpost")}})">
+                                <a href="{{route('index.show',['post'=> $post->id])}}" class="thumb-url"></a>
+                                <img src="#" alt="" class="entry__img d-none">
                                 <a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"> {{'دسته بندی :'. ' '.$post->category->title}}</a>
                             </div>
 
                             <div class="entry__body post-list__body card__body">
                                 <div class="entry__header">
                                     <h2 class="entry__title">
-                                        <a href="single-post.html">{{$post->title}}</a>
+                                        <a href="{{route('index.show',['post'=> $post->id])}}">{{$post->title}}</a>
                                     </h2>
                                     <ul class="entry__meta">
-                                        <li class="entry__meta-author">
-                                            <span>نویسنده:</span>
-                                            <a href="#">{{$post->user->name}}</a>
-                                        </li>
+
+                                        <div class="entry-author ">
+                                            <li class="entry__meta-author">
+                                                <span>نویسنده:</span>
+                                                <a href="#">{{$post->user->name}}</a>
+                                            </li>
+                                            <img alt=""  src="{{asset("$picuser")}}" class="avatar lazyload">
+                                        </div>
 
                                     </ul>
                                 </div>
@@ -201,13 +210,7 @@
                 @endforeach
 
                 <!-- Pagination -->
-                    <nav class="pagination">
-                        <span class="pagination__page pagination__page--current">۱</span>
-                        <a href="#" class="pagination__page">۲</a>
-                        <a href="#" class="pagination__page">۳</a>
-                        <a href="#" class="pagination__page">۴</a>
-                        <a href="#" class="pagination__page pagination__icon pagination__page--next"><i class="ui-arrow-left"></i></a>
-                    </nav>
+
                 </div> <!-- end posts -->
 
                 <!-- Sidebar -->
@@ -215,100 +218,37 @@
 
                     <!-- Widget Popular Posts -->
                     <aside class="widget widget-popular-posts">
-                        <h4 class="widget-title">محبوب ترین مقالات</h4>
+                        <h4 class="widget-title">جدید ترین مقالات</h4>
                         <ul class="post-list-small">
+                            @foreach($endposts as $post)
+                                @php
+                                    $urlp=$post->image->file;
+                                    $picpost='storage/'.substr($urlp,'7');
+                                @endphp
                             <li class="post-list-small__item">
                                 <article class="post-list-small__entry clearfix">
                                     <div class="post-list-small__img-holder">
                                         <div class="thumb-container thumb-100">
-                                            <a href="single-post.html">
-                                                <img data-src="img/content/thumb/post-8.jpg" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
+                                            <a href="{{route('index.show',['post'=> $post->id])}}">
+                                                <img data-src="{{asset("$picpost")}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="post-list-small__body">
                                         <h3 class="post-list-small__entry-title">
-                                            <a href="single-post.html">گوشی تاشو هواوی میت ایکس در تاریخ مقرر عرضه می‌شود</a>
+                                            <a href="{{route('index.show',['post'=> $post->id])}}">{{$post->title}}</a>
                                         </h3>
                                         <ul class="entry__meta">
                                             <li class="entry__meta-author">
                                                 <span>نویسنده:</span>
-                                                <a href="#">بهرامی راد</a>
+                                                <a href="#">{{$post->user->name}}</a>
                                             </li>
 
                                         </ul>
                                     </div>
                                 </article>
                             </li>
-                            <li class="post-list-small__item">
-                                <article class="post-list-small__entry clearfix">
-                                    <div class="post-list-small__img-holder">
-                                        <div class="thumb-container thumb-100">
-                                            <a href="single-post.html">
-                                                <img data-src="img/content/thumb/post-2.jpg" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="post-list-small__body">
-                                        <h3 class="post-list-small__entry-title">
-                                            <a href="single-post.html">نمایشگر وان پلاس ۷ قرار است ما را شگفت‌زده کند!</a>
-                                        </h3>
-                                        <ul class="entry__meta">
-                                            <li class="entry__meta-author">
-                                                <span>نویسنده:</span>
-                                                <a href="#">بهرامی راد</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </article>
-                            </li>
-                            <li class="post-list-small__item">
-                                <article class="post-list-small__entry clearfix">
-                                    <div class="post-list-small__img-holder">
-                                        <div class="thumb-container thumb-100">
-                                            <a href="single-post.html">
-                                                <img data-src="img/content/thumb/post-6.jpg" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="post-list-small__body">
-                                        <h3 class="post-list-small__entry-title">
-                                            <a href="single-post.html">چرا لانچرهای اندروید دیگر محبوبیت گذشته را ندارند؟</a>
-                                        </h3>
-                                        <ul class="entry__meta">
-                                            <li class="entry__meta-author">
-                                                <span>نویسنده:</span>
-                                                <a href="#">بهرامی راد</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </article>
-                            </li>
-                            <li class="post-list-small__item">
-                                <article class="post-list-small__entry clearfix">
-                                    <div class="post-list-small__img-holder">
-                                        <div class="thumb-container thumb-100">
-                                            <a href="single-post.html">
-                                                <img data-src="img/content/thumb/post-5.jpg" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="post-list-small__body">
-                                        <h3 class="post-list-small__entry-title">
-                                            <a href="single-post.html">۵ کتاب روانشناسی که برای زندگی بهتر باید بخوانید</a>
-                                        </h3>
-                                        <ul class="entry__meta">
-                                            <li class="entry__meta-author">
-                                                <span>نویسنده:</span>
-                                                <a href="#">بهرامی راد</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </article>
-                            </li>
+                            @endforeach
                         </ul>
                     </aside> <!-- end widget popular posts -->
                     <!-- Widget Ad 300 -->
