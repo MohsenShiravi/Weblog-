@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,10 +29,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-    Route::get('/index', [IndexController::class, 'index'])->name('index');
 
+Route::get('/index', [IndexController::class, 'index'])->name('index');
 Route::get('/show/{post}', [IndexController::class, 'show'])->name('index.show');
-
 
 Route::prefix('categories')->middleware(['auth'])->group(function (){
     Route::get('/',[CategoryController::class,'index'])->name('categories.index');
@@ -50,6 +51,7 @@ Route::prefix('posts')->middleware(['auth'])->group(function (){
     Route::get('/destroy/{post}',[PostController::class,'destroy'])->name('posts.destroy');
 
 });
+
 Route::prefix('images')->middleware(['auth'])->group(function (){
     Route::get('/',[ImageController::class,'index'])->name('images.index');
     Route::get('/create',[ImageController::class,'create'])->name('images.create');
@@ -57,4 +59,21 @@ Route::prefix('images')->middleware(['auth'])->group(function (){
     Route::get('/edit/{image}',[ImageController::class,'edit'])->name('images.edit');
     Route::post('/update/{image}',[ImageController::class,'update'])->name('images.update');
     Route::get('/destroy/{image}',[ImageController::class,'destroy'])->name('images.destroy');
+});
+
+Route::prefix('roles')->group(function (){
+    Route::get('/',[RoleController::class,'index'])->name('roles.index');
+    Route::get('/create',[RoleController::class,'create'])->name('roles.create');
+    Route::post('/store',[RoleController::class,'store'])->name('roles.store');
+    Route::get('/edit/{role}',[RoleController::class,'edit'])->name('roles.edit');
+    Route::post('/update/{role}',[RoleController::class,'update'])->name('roles.update');
+    Route::get('/destroy/{role}',[RoleController::class,'destroy'])->name('roles.destroy');
+});
+Route::prefix('users')->group(function (){
+    Route::get('/',[UserController::class,'index'])->name('users.index');
+    Route::get('/create',[UserController::class,'create'])->name('users.create');
+    Route::post('/store/{user}',[UserController::class,'store'])->name('users.store');
+    Route::get('/edit/{user}',[UserController::class,'edit'])->name('users.edit');
+    Route::post('/update/{user}',[UserController::class,'update'])->name('users.update');
+    Route::get('/destroy/{user}',[UserController::class,'destroy'])->name('users.destroy');
 });
