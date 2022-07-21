@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/isoblog/dashboard/comments/index.php" class="nav-link">
+                    <a href="{{route('comments.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>نظرات کاربران</p>
                     </a>

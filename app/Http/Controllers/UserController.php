@@ -16,10 +16,10 @@ class UserController extends Controller
         $roles=Role::all();
         return view ('dashboard.users.index',['users'=>$users,'roles'=>$roles]);
     }
-    public function edit(User $user)
+    public function show(User $user)
     {
         $roles=Role::all();
-        return view('dashboard.users.edit',compact('user','roles'));
+        return view('dashboard.users.show',compact('user','roles'));
     }
     public function store(Request $request ,User $user)
     {

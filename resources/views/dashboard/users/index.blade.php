@@ -52,7 +52,7 @@
                                             @foreach($user->roles as $role)
                                             <td><ol><li>{{$role->title}}</li></ol></td>
                                             @endforeach
-                                            <td><a href="{{route('users.edit',['user'=> $user->id])}}" class="btn btn-sm btn-primary">اختصاص نقش</a>
+                                            <td><a href="{{route('users.show',['user'=> $user->id])}}" class="btn btn-sm btn-primary">اختصاص نقش</a>
 
                                         </tr>
                                     @endforeach

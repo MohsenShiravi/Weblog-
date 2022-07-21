@@ -180,7 +180,7 @@
                         @endphp
                         <article class="entry card post-list">
                             <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{asset("$picpost")}})">
-                                <a href="{{route('index.show',['post'=> $post->id])}}" class="thumb-url"></a>
+                                <a href="{{route('show',['post'=> $post->id])}}" class="thumb-url"></a>
                                 <img src="#" alt="" class="entry__img d-none">
                                 <a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"> {{'دسته بندی :'. ' '.$post->category->title}}</a>
                             </div>
@@ -188,7 +188,7 @@
                             <div class="entry__body post-list__body card__body">
                                 <div class="entry__header">
                                     <h2 class="entry__title">
-                                        <a href="{{route('index.show',['post'=> $post->id])}}">{{$post->title}}</a>
+                                        <a href="{{route('show',['post'=> $post->id])}}">{{$post->title}}</a>
                                     </h2>
                                     <ul class="entry__meta">
 
@@ -229,14 +229,14 @@
                                 <article class="post-list-small__entry clearfix">
                                     <div class="post-list-small__img-holder">
                                         <div class="thumb-container thumb-100">
-                                            <a href="{{route('index.show',['post'=> $post->id])}}">
+                                            <a href="{{route('show',['post'=> $post->id])}}">
                                                 <img data-src="{{asset("$picpost")}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="post-list-small__body">
                                         <h3 class="post-list-small__entry-title">
-                                            <a href="{{route('index.show',['post'=> $post->id])}}">{{$post->title}}</a>
+                                            <a href="{{route('show',['post'=> $post->id])}}">{{$post->title}}</a>
                                         </h3>
                                         <ul class="entry__meta">
                                             <li class="entry__meta-author">

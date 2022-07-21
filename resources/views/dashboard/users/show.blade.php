@@ -25,7 +25,7 @@
                                         <input disabled type="text" value="{{old('name',$user->email)}}" name="title" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
                                     </div>
                                 <div class="form-row">
-                                    <label class="control-label" for="inputError"> تگ های مورد نظر را انتخاب کنید</label>
+                                    <label class="control-label" for="inputError">انتخاب نقش:</label>
                                     @foreach($roles as $role)
                                         <label for="" class="pr-4">
                                             <input type="checkbox" name="roles[]" id="" value="{{$role->id}}">{{$role->title}}

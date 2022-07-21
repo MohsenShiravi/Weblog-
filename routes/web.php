@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -31,7 +32,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
-Route::get('/show/{post}', [IndexController::class, 'show'])->name('index.show');
+Route::get('/show/{post}', [IndexController::class, 'show'])->name('show');
+Route::post('/store',[IndexController::class,'store'])->name('comments.store');
 
 Route::prefix('categories')->middleware(['auth'])->group(function (){
     Route::get('/',[CategoryController::class,'index'])->name('categories.index');
@@ -71,9 +73,12 @@ Route::prefix('roles')->group(function (){
 });
 Route::prefix('users')->group(function (){
     Route::get('/',[UserController::class,'index'])->name('users.index');
-    Route::get('/create',[UserController::class,'create'])->name('users.create');
     Route::post('/store/{user}',[UserController::class,'store'])->name('users.store');
-    Route::get('/edit/{user}',[UserController::class,'edit'])->name('users.edit');
-    Route::post('/update/{user}',[UserController::class,'update'])->name('users.update');
-    Route::get('/destroy/{user}',[UserController::class,'destroy'])->name('users.destroy');
+    Route::get('/show/{user}',[UserController::class,'show'])->name('users.show');
+});
+Route::prefix('comments')->group(function (){
+    Route::get('index',[CommentController::class,'index'])->name('comments.index');
+    Route::get('/edit/{comment}',[CommentController::class,'edit'])->name('comments.edit');
+    Route::post('/update/{comment}',[CommentController::class,'update'])->name('comments.update');
+    Route::get('/destroy/{comment}',[CommentController::class,'destroy'])->name('comments.destroy');
 });

@@ -3,6 +3,7 @@
 @section('content')
     <main class="main oh" id="main">
 
+
         <!-- Top Bar -->
         <div class="top-bar d-none d-lg-block">
             <div class="container">
@@ -152,59 +153,23 @@
                         <!-- Comments -->
                         <div class="entry-comments">
                             <div class="title-wrap title-wrap--line">
-                                <h3 class="section-title">۳ دیدگاه</h3>
+                                <h3 class="section-title">نظرات </h3>
+                                @foreach($comments as $comment)
                             </div>
                             <ul class="comment-list">
                                 <li class="comment">
                                     <div class="comment-body">
-                                        <div class="comment-avatar">
-                                            <img alt="" src="img/default-avatar.png">
-                                        </div>
+
                                         <div class="comment-text">
-                                            <h6 class="comment-author">بهرامی راد</h6>
-                                            <div class="comment-metadata">
-                                                <a href="#" class="comment-date">۴ اردیبهشت ۱۳۹۸</a>
-                                            </div>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+
+                                            @if(isset($comment->auther_name))<h6 class="comment-author">{{$comment->auther_name}}@else{{$comment->user->name}} @endif</h6>
+
+                                            <p>{{$comment->content}}</p>
                                             <a href="#" class="comment-reply">پاسخ</a>
                                         </div>
+                                        @endforeach
                                     </div>
 
-                                    <ul class="children">
-                                        <li class="comment">
-                                            <div class="comment-body">
-                                                <div class="comment-avatar">
-                                                    <img alt="" src="img/default-avatar.png">
-                                                </div>
-                                                <div class="comment-text">
-                                                    <h6 class="comment-author">حامد</h6>
-                                                    <div class="comment-metadata">
-                                                        <a href="#" class="comment-date">۴ اردیبهشت ۱۳۹۸</a>
-                                                    </div>
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                                                    <a href="#" class="comment-reply">پاسخ</a>
-                                                </div>
-                                            </div>
-                                        </li> <!-- end reply comment -->
-                                    </ul>
-
-                                </li> <!-- end 1-2 comment -->
-
-                                <li>
-                                    <div class="comment-body">
-                                        <div class="comment-avatar">
-                                            <img alt="" src="img/default-avatar.png">
-                                        </div>
-                                        <div class="comment-text">
-                                            <h6 class="comment-author">علی</h6>
-                                            <div class="comment-metadata">
-                                                <a href="#" class="comment-date">۴ اردیبهشت ۱۳۹۸</a>
-                                            </div>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                                            <a href="#" class="comment-reply">پاسخ</a>
-                                        </div>
-                                    </div>
-                                </li> <!-- end 3 comment -->
 
                             </ul>
                         </div> <!-- end comments -->
@@ -214,30 +179,36 @@
                             <div class="title-wrap">
                                 <h5 class="comment-respond__title section-title">دیدگاه شما</h5>
                             </div>
-                            <form id="form" class="comment-form" method="post" action="#">
+
+
+                            <form id="form" class="comment-form" method="post" action="{{route('comments.store')}}">
+                                @csrf
+                                <input name="post_id"  type="hidden" value="{{$post->id}}">
                                 <p class="comment-form-comment">
-                                    <label for="comment">دیدگاه</label>
-                                    <textarea id="comment" name="comment" rows="5" required="required"></textarea>
+                                    <label >دیدگاه</label>
+                                    <textarea  name="content" rows="5" required="required"></textarea>
                                 </p>
+
+                                @if(!auth()->user())
 
                                 <div class="row row-20">
                                     <div class="col-lg-4">
-                                        <label for="name">نام: *</label>
-                                        <input name="name" id="name" type="text">
+                                        <label >نام</label>
+                                        <input name="auther_name"  type="text">
                                     </div>
                                     <div class="col-lg-4">
-                                        <label for="comment">ایمیل: *</label>
-                                        <input name="email" id="email" type="email">
+                                        <label>ایمیل: </label>
+                                        <input name="email"  type="email">
                                     </div>
                                     <div class="col-lg-4">
-                                        <label for="comment">وبسایت:</label>
-                                        <input name="website" id="website" type="text">
+                                        <label >موبایل:</label>
+                                        <input name="mobile"  type="text">
                                     </div>
                                 </div>
-
-                                <p class="comment-form-submit">
-                                    <input type="submit" class="btn btn-lg btn-color btn-button" value="ارسال دیدگاه" id="submit-message">
-                                </p>
+                                @endif
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">ثبت</button>
+                                </div>
 
                             </form>
                         </div> <!-- end comment form -->
@@ -261,14 +232,14 @@
                                     <article class="post-list-small__entry clearfix">
                                         <div class="post-list-small__img-holder">
                                             <div class="thumb-container thumb-100">
-                                                <a href="{{route('index.show',['post'=> $post->id])}}">
+                                                <a href="{{route('show',['post'=> $post->id])}}">
                                                     <img data-src="{{asset("$picpost")}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-list-small__body">
                                             <h3 class="post-list-small__entry-title">
-                                                <a href="{{route('index.show',['post'=> $post->id])}}">{{$post->title}}</a>
+                                                <a href="{{route('show',['post'=> $post->id])}}">{{$post->title}}</a>
                                             </h3>
                                             <ul class="entry__meta">
                                                 <li class="entry__meta-author">
