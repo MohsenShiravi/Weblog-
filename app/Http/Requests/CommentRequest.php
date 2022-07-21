@@ -13,7 +13,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -24,11 +24,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content'=>'required',
-            'mobile'=>'required',
-            'auther_name'=>'required',
-            'email'=>'required',
-            'is_confirm'=>'required',
+
         ];
     }
 }

@@ -84,6 +84,12 @@
                         <p>نظرات کاربران</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('tags.show')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>تگ های پست</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

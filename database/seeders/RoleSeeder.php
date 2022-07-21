@@ -17,8 +17,10 @@ class RoleSeeder extends Seeder
     {
         Role::query()->insert([
             ['title'=>'admin'],
+            ['title'=>'deputy'],
             ['title'=>'editor'],
-            ['title'=>'normal user'],
+            ['title'=>'creator'],
+            ['title'=>'normal user']
         ]);
     }
 }

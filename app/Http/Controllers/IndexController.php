@@ -21,7 +21,7 @@ class IndexController extends Controller
     }
 
 
-    public function store(CommentRequest $request,)
+    public function store(Request $request,)
     {
         if(auth()->user()){
             Comment::query()->create([

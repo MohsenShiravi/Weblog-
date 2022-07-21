@@ -42,7 +42,6 @@
                                     </select>
                                 </div>
 
-
                                 <div class="form-group">
                                     <label class="control-label" for="inputError"> وضعیت انتشار</label>
                                     <div class="form-check">

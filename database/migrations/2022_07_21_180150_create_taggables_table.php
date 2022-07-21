@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('file')->nullable();
-            $table->morphs('imageable');
-            $table->timestamps();
-
+        Schema::create('taggables', function (Blueprint $table) {
+            $table->foreignId('tag_id');
+            $table->morphs('taggable');
+            $table->timestamp('created_at');
+            $table->primary(['tag_id','taggable_id','taggable_type']);
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('taggables');
     }
 };

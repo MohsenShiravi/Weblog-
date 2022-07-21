@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -82,3 +83,4 @@ Route::prefix('comments')->group(function (){
     Route::post('/update/{comment}',[CommentController::class,'update'])->name('comments.update');
     Route::get('/destroy/{comment}',[CommentController::class,'destroy'])->name('comments.destroy');
 });
+Route::get('tags/show',[TagController::class, 'show'])->name('tags.show');
