@@ -148,8 +148,8 @@
                                     <form class="nav__search-form" action="{{route('search')}}" method="get">
                                         <input type="text" placeholder="جستجو مقالات" name="search" class="nav__search-input"><br>
                                         <div class="form-group">
-                                            <lable>جستجو بر اساس</lable>
                                             <select name="field" class="nav__search-input">
+                                                <lable>جستجو بر اساس</lable>
                                                 <option value="title">عنوان پست</option>
                                                 <option value="content">متن پست</option>
                                             </select>
