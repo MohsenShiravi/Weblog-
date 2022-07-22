@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 Route::get('/show/{post}', [IndexController::class, 'show'])->name('show');
+Route::get('/search/',[IndexController::class,'search'])->name('search');
 Route::post('/store',[IndexController::class,'store'])->name('comments.store');
 
 Route::prefix('categories')->middleware(['auth'])->group(function (){

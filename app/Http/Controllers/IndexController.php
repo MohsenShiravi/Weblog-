@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
@@ -15,7 +14,7 @@ class IndexController extends Controller
     public function index()
     {
         $endposts=Post::latest()->take(3)->get();
-        $posts = Post::all();
+        $posts = Post::query()->where('status','=','published')->get();
         $categories = Category::all();
         return view ('index',compact('posts','categories','endposts'));
     }
@@ -47,5 +46,14 @@ class IndexController extends Controller
         $endposts=Post::latest()->take(3)->get();
         $categories = Category::all();
         return view('show',['post'=>$post,'categories'=>$categories,'user'=>$user,'endposts'=>$endposts,'comments'=>$comments]);
+    }
+    public function search(Request $request){
+        $search = $request->input('search');
+        $field = $request->input('field');
+        $posts = Post::query()
+            ->where($field, 'LIKE', "%{$search}%")
+            ->get();
+        $endposts=Post::latest()->take(3)->get();
+        return view('search', compact('posts','endposts'));
     }
 }

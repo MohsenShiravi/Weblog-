@@ -1,8 +1,69 @@
 @extends('layouts.master')
-@section('title','تک پست')
+@section('title','صفحه اصلی')
 @section('content')
-    <main class="main oh" id="main">
+    <body class="bg-light style-default style-rounded">
 
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Bg Overlay -->
+    <div class="content-overlay"></div>
+
+    <!-- Sidenav -->
+    <header class="sidenav" id="sidenav">
+
+        <!-- close -->
+        <div class="sidenav__close">
+            <button class="sidenav__close-button" id="sidenav__close-button" aria-label="close sidenav">
+                <i class="ui-close sidenav__close-icon"></i>
+            </button>
+        </div>
+
+        <!-- Nav -->
+        <nav class="sidenav__menu-container">
+            <ul class="sidenav__menu" role="menubar">
+                <li>
+                    <a href="#" class="sidenav__menu-url">صفحه اصلی</a>
+                </li>
+
+
+                <!-- Categories -->
+                <li>
+                    <a href="#" class="sidenav__menu-url">تکنولوژی</a>
+                </li>
+                <li>
+                    <a href="#" class="sidenav__menu-url">زیبایی و سلامت</a>
+                </li>
+                <li>
+                    <a href="#" class="sidenav__menu-url">موبایل</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="socials sidenav__socials">
+            <a class="social social-facebook" href="#" target="_blank" aria-label="facebook">
+                <i class="ui-facebook"></i>
+            </a>
+            <a class="social social-twitter" href="#" target="_blank" aria-label="twitter">
+                <i class="ui-twitter"></i>
+            </a>
+            <a class="social social-google-plus" href="#" target="_blank" aria-label="google">
+                <i class="ui-google"></i>
+            </a>
+            <a class="social social-youtube" href="#" target="_blank" aria-label="youtube">
+                <i class="ui-youtube"></i>
+            </a>
+            <a class="social social-instagram" href="#" target="_blank" aria-label="instagram">
+                <i class="ui-instagram"></i>
+            </a>
+        </div>
+    </header> <!-- end sidenav -->
+
+    <main class="main oh" id="main">
 
         <!-- Top Bar -->
         <div class="top-bar d-none d-lg-block">
@@ -67,11 +128,11 @@
                             <ul class="nav__menu">
 
                                 <li class="active">
-                                    <a href="/index">صفحه اصلی</a>
+                                    <a href="index.html">صفحه اصلی</a>
                                 </li>
-
-
-
+                                <li class="active">
+                                    <a href="/dashboard">داشبورد</a>
+                                </li>
                             </ul> <!-- end menu -->
                         </nav> <!-- end nav-wrap -->
 
@@ -89,7 +150,6 @@
                                         <div class="form-group">
                                             <lable>جستجو بر اساس</lable>
                                             <select name="field" class="nav__search-input">
-                                                <lable>جستجو بر اساس</lable>
                                                 <option value="title">عنوان پست</option>
                                                 <option value="content">متن پست</option>
                                             </select>
@@ -109,120 +169,56 @@
             </div>
         </header> <!-- end navigation -->
 
-        <!-- Breadcrumbs -->
-        <div class="container">
-            <ul class="breadcrumbs">
 
-            </ul>
-        </div>
-
-        <div class="main-container container" id="main-container">
+        <div class="main-container container pt-40" id="main-container">
 
             <!-- Content -->
             <div class="row">
 
-                <!-- post content -->
+                <!-- Posts -->
                 <div class="col-lg-8 blog__content mb-72">
-                    <div class="content-box">
-
-                        <!-- standard post -->
-                        <article class="entry mb-0">
-                            @php
-                                $urlp=$post->image->file;
-                                $picpost='storage/'.substr($urlp,'7');
-                                $upic=$post->user->image->file;
-                                $picuser='storage/'.substr($upic,'7');
-                            @endphp
-                            <div class="single-post__entry-header entry__header">
-                                <a href="categories.html" class="entry__meta-category entry__meta-category--label entry__meta-category--green">{{$post->category->title}}</a>
-                                <h1 class="single-post__entry-title">
-                                    {{$post->title}}
-                                </h1>
-                                <div class="entry__img-holder">
-                                    <img  src="{{asset("$picpost")}}" alt="" class="entry__img">
-                                </div>
-                                <!-- Author -->
-                                <div class="entry-author clearfix">
-
-                                    <img alt=""  src="{{asset("$picuser")}}" class="avatar lazyload">
-                                    <div class="entry-author__info">
-                                        <h6 class="entry-author__name">
-                                            <a href="#">{{$post->user->name}}</a>
-                                        </h6>
-                                        <p class="mb-0">{{$post->content}}</p>
-                                    </div>
-                                </div>
-
-                                <!-- Related Posts -->
-
-
-                        </article> <!-- end standard post -->
-
-                        <!-- Comments -->
-                        <div class="entry-comments">
-                            <div class="title-wrap title-wrap--line">
-                                <h3 class="section-title">نظرات </h3>
-                                @foreach($comments as $comment)
+                    <h1 class="page-title">نمایش پست ها</h1>
+                    @foreach($posts as $post)
+                        @php
+                            $urlp=$post->image->file;
+                            $picpost='storage/'.substr($urlp,'7');
+                            $upic=$post->user->image->file;
+                            $picuser='storage/'.substr($upic,'7');
+                        @endphp
+                        <article class="entry card post-list">
+                            <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{asset("$picpost")}})">
+                                <a href="{{route('show',['post'=> $post->id])}}" class="thumb-url"></a>
+                                <img src="#" alt="" class="entry__img d-none">
+                                <a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"> {{'دسته بندی :'. ' '.$post->category->title}}</a>
                             </div>
-                            <ul class="comment-list">
-                                <li class="comment">
-                                    <div class="comment-body">
 
-                                        <div class="comment-text">
+                            <div class="entry__body post-list__body card__body">
+                                <div class="entry__header">
+                                    <h2 class="entry__title">
+                                        <a href="{{route('show',['post'=> $post->id])}}">{{$post->title}}</a>
+                                    </h2>
+                                    <ul class="entry__meta">
 
-                                            @if(isset($comment->auther_name))<h6 class="comment-author">{{$comment->auther_name}}@else{{$comment->user->name}} @endif</h6>
-
-                                            <p>{{$comment->content}}</p>
-                                            <a href="#" class="comment-reply">پاسخ</a>
+                                        <div class="entry-author ">
+                                            <li class="entry__meta-author">
+                                                <span>نویسنده:</span>
+                                                <a href="#">{{$post->user->name}}</a>
+                                            </li>
+                                            <img alt=""  src="{{asset("$picuser")}}" class="avatar lazyload">
                                         </div>
-                                        @endforeach
-                                    </div>
 
-
-                            </ul>
-                        </div> <!-- end comments -->
-
-                        <!-- Comment Form -->
-                        <div id="respond" class="comment-respond">
-                            <div class="title-wrap">
-                                <h5 class="comment-respond__title section-title">دیدگاه شما</h5>
+                                    </ul>
+                                </div>
+                                <div class="entry__excerpt">
+                                    <p>{{$post->short_content}}</p>
+                                </div>
                             </div>
+                        </article>
+                @endforeach
 
+                <!-- Pagination -->
 
-                            <form id="form" class="comment-form" method="post" action="{{route('comments.store')}}">
-                                @csrf
-                                <input name="post_id"  type="hidden" value="{{$post->id}}">
-                                <p class="comment-form-comment">
-                                    <label >دیدگاه</label>
-                                    <textarea  name="content" rows="5" required="required"></textarea>
-                                </p>
-
-                                @if(!auth()->user())
-
-                                <div class="row row-20">
-                                    <div class="col-lg-4">
-                                        <label >نام</label>
-                                        <input name="auther_name"  type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>ایمیل: </label>
-                                        <input name="email"  type="email">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label >موبایل:</label>
-                                        <input name="mobile"  type="text">
-                                    </div>
-                                </div>
-                                @endif
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">ثبت</button>
-                                </div>
-
-                            </form>
-                        </div> <!-- end comment form -->
-
-                    </div> <!-- end content box -->
-                </div> <!-- end post content -->
+                </div> <!-- end posts -->
 
                 <!-- Sidebar -->
                 <aside class="col-lg-4 sidebar sidebar--right">
@@ -262,8 +258,6 @@
                             @endforeach
                         </ul>
                     </aside> <!-- end widget popular posts -->
-
-
                     <!-- Widget Ad 300 -->
                     <aside class="widget widget_media_image">
                         <a href="#">
@@ -271,11 +265,8 @@
                         </a>
                     </aside> <!-- end widget ad 300 -->
 
-
-
                 </aside> <!-- end sidebar -->
 
             </div> <!-- end content -->
         </div> <!-- end main container -->
-
 @endsection

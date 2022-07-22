@@ -1,4 +1,4 @@
-@extends('dashboard.layout.new-master')
+@extends('layouts.master')
 @section('title','صفحه اصلی')
 @section('content')
     <body class="bg-light style-default style-rounded">
@@ -145,8 +145,15 @@
                                     <i class="ui-search nav__search-trigger-icon"></i>
                                 </a>
                                 <div class="nav__search-box" id="nav__search-box">
-                                    <form class="nav__search-form">
-                                        <input type="text" placeholder="جستجو مقالات" class="nav__search-input">
+                                    <form class="nav__search-form" action="{{route('search')}}" method="get">
+                                        <input type="text" placeholder="جستجو مقالات" name="search" class="nav__search-input"><br>
+                                        <div class="form-group">
+                                            <lable>جستجو بر اساس</lable>
+                                            <select name="field" class="nav__search-input">
+                                                <option value="title">عنوان پست</option>
+                                                    <option value="content">متن پست</option>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="search-button btn btn-lg btn-color btn-button">
                                             <i class="ui-search nav__search-icon"></i>
                                         </button>
