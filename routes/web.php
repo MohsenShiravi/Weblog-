@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -85,3 +86,6 @@ Route::prefix('comments')->group(function (){
     Route::get('/destroy/{comment}',[CommentController::class,'destroy'])->name('comments.destroy');
 });
 Route::get('tags/show',[TagController::class, 'show'])->name('tags.show');
+Route::get('/profile',[ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/update',[ProfileController::class,'update'])->name('profile.update');

@@ -90,6 +90,12 @@
                         <p>تگ های پست</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('profile.show')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>پروفایل</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
