@@ -15,7 +15,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" method="post" action="{{route('posts.store')}}" >
+                        <form role="form" method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -31,7 +31,10 @@
                                     <label>محتوا</label>
                                     <textarea name="content" value="{{old('content')}}" class="form-control" rows="3" placeholder=" محتوا را وارد نمایید"></textarea>
                                 </div>
-
+                                <div class="box-widget">
+                                    <h5>تصویر شاخص</h5>
+                                    <input type="file" name="file">
+                                </div>
                                 <div class="form-group">
                                     <label>نام دسته بندی </label>
                                     <select name="category_id" class="form-control">
@@ -40,6 +43,14 @@
                                         <option value="{{$category->id}}">{{$category->title}}</option>
                                       @endforeach
                                     </select>
+                                </div>
+                                <div class="form-row">
+                                    <label class="control-label" for="inputError"> تگ های مورد نظر را انتخاب کنید</label>
+                                    @foreach($tags as $tag)
+                                        <label for="" class="pr-4">
+                                            <input type="checkbox" name="tags[]" id="" value="{{$tag->id}}">{{$tag->title}}
+                                        </label>
+                                    @endforeach
                                 </div>
 
                                 <div class="form-group">

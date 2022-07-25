@@ -42,16 +42,13 @@
                                         <th>دسته بندی</th>
                                         <th>وضعیت</th>
                                         <th>نام نویسنده</th>
-                                        <th>jjده</th>
+                                        <th>تصویر پست</th>
                                         <th>عملیات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($posts as $post)
-                                        @php
-                                           $url=$post->image->file;
-                                           $pic='storage/'.substr($url,'7');
-                                        @endphp
+
 
                            <tr>
                                             <td>{{ $loop->iteration}}</td>
@@ -64,7 +61,7 @@
                                             <td>{{$post->status}}</td>
                                             <td>{{$post->user->name}}</td>
 
-                                            <td><img width="50px" height="40px" src="{{asset("$pic")}}"></td>
+                                            <td><img width="50px" height="40px" src="{{$post->image->file}}"></td>
 
                                             <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
 

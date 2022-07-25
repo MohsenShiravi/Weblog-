@@ -127,24 +127,18 @@
 
                         <!-- standard post -->
                         <article class="entry mb-0">
-                            @php
-                                $urlp=$post->image->file;
-                                $picpost='storage/'.substr($urlp,'7');
-                                $upic=$post->user->image->file;
-                                $picuser='storage/'.substr($upic,'7');
-                            @endphp
                             <div class="single-post__entry-header entry__header">
                                 <a href="categories.html" class="entry__meta-category entry__meta-category--label entry__meta-category--green">{{$post->category->title}}</a>
                                 <h1 class="single-post__entry-title">
                                     {{$post->title}}
                                 </h1>
                                 <div class="entry__img-holder">
-                                    <img  src="{{asset("$picpost")}}" alt="" class="entry__img">
+                                    <img  src="{{$post->image->file}}" alt="" class="entry__img">
                                 </div>
                                 <!-- Author -->
                                 <div class="entry-author clearfix">
 
-                                    <img alt=""  src="{{asset("$picuser")}}" class="avatar lazyload">
+                                    <img alt=""  src="{{$post->user->image->file}}" class="avatar lazyload">
                                     <div class="entry-author__info">
                                         <h6 class="entry-author__name">
                                             <a href="#">{{$post->user->name}}</a>
@@ -232,16 +226,12 @@
                         <h4 class="widget-title">جدید ترین مقالات</h4>
                         <ul class="post-list-small">
                             @foreach($endposts as $post)
-                                @php
-                                    $urlp=$post->image->file;
-                                    $picpost='storage/'.substr($urlp,'7');
-                                @endphp
                                 <li class="post-list-small__item">
                                     <article class="post-list-small__entry clearfix">
                                         <div class="post-list-small__img-holder">
                                             <div class="thumb-container thumb-100">
                                                 <a href="{{route('show',['post'=> $post->id])}}">
-                                                    <img data-src="{{asset("$picpost")}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
+                                                    <img data-src="{{$post->image->file}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
                                                 </a>
                                             </div>
                                         </div>

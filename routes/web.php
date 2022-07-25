@@ -88,4 +88,4 @@ Route::prefix('comments')->group(function (){
 Route::get('tags/show',[TagController::class, 'show'])->name('tags.show');
 Route::get('/profile',[ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile/update',[ProfileController::class,'update'])->name('profile.update');
+Route::post('/profile/update',[ProfileController::class,'update'])->name('profile.update');

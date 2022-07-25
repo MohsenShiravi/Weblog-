@@ -12,19 +12,24 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" method="post"  action="/profile/update" >
+                        <form role="form" method="post"  action="{{route('profile.update',['user'=>$user->id])}}" enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">نام</label>
-                                    <input type="text" value="{{old('title',$user->name)}}" name="title" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
+                                    <input type="text" value="{{old('title',$user->name)}}" name="name" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ایمیل</label>
-                                    <input type="email" value="{{old('title',$user->email)}}" name="title" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
+                                    <input type="email" value="{{old('email',$user->email)}}" name="email" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">ویرایش تصویر</label>
+                                    <input type="file" name="file" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
                                 </div>
                             </div>
                             <!-- /.card-body -->

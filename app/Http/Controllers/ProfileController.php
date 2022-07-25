@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Curl\User;
+use App\Models\Image;
+
+use App\Models\Post;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,10 +24,22 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        auth()->user()->update([
-            'name'=>$request->get('name'),
-            'email'=>$request->get('email')
-        ]);
+
+        $user = auth()->user();
+
+        $user->update([
+            'name' => $request->get('name', $user->name),
+            'email' => $request->get('email', $user->email)
+            ]);
+
+
+            $file = $request['file'];
+
+            $img = $this->ImageUpload($file , 'files/');
+            Image::query()
+            ->where('imageable_id',$user->id)
+            ->where('imageable_type',User::class)
+            ->update(['file'=>$img]);
         return redirect()->route('profile.show');
     }
 }

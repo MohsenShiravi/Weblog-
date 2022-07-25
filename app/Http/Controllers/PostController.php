@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
+
+use App\Models\Image;
 use App\Models\Post;
 
 use App\Models\Role;
@@ -32,6 +34,20 @@ public function create()
             'user_id'=>Auth::id(),
             'status'=>$request->get('status'),
         ]);
+        if ($request['file']){
+            $file = $request['file'];
+            $img = $this->ImageUpload($file , 'files/');
+        }
+        else {
+            $img = 'files/default.jpg';
+        }
+        $post=Post::query()->find($posts->id);
+        $image=new Image();
+        $image->file=$img;
+        $image->imageable_id=$post->id;
+        $image->imageable_type=Post::class;
+        $image->save();
+
         $posts->tags()->attach($request->get('tags'));
         return redirect()->route('posts.index');
     }
@@ -69,6 +85,8 @@ public function create()
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+
 }
 
 

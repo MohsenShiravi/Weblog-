@@ -26,4 +26,16 @@ class UserController extends Controller
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('users.index');
     }
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        /*User::query()->update([
+            'name' => $request->get('name', $user->name),
+            'email' => $request->get('email', $user->email),
+
+        ]);
+
+        return redirect()->route('profile.show');*/
+    }
 }

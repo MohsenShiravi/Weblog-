@@ -179,14 +179,8 @@
                 <div class="col-lg-8 blog__content mb-72">
                     <h1 class="page-title">نمایش پست ها</h1>
                     @foreach($posts as $post)
-                        @php
-                            $urlp=$post->image->file;
-                            $picpost='storage/'.substr($urlp,'7');
-                            $upic=$post->user->image->file;
-                            $picuser='storage/'.substr($upic,'7');
-                        @endphp
                         <article class="entry card post-list">
-                            <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{asset("$picpost")}})">
+                            <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{$post->image->file}})">
                                 <a href="{{route('show',['post'=> $post->id])}}" class="thumb-url"></a>
                                 <img src="#" alt="" class="entry__img d-none">
                                 <a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"> {{'دسته بندی :'. ' '.$post->category->title}}</a>
@@ -204,7 +198,7 @@
                                                 <span>نویسنده:</span>
                                                 <a href="#">{{$post->user->name}}</a>
                                             </li>
-                                            <img alt=""  src="{{asset("$picuser")}}" class="avatar lazyload">
+                                            <img alt=""  src="{{$post->user->image->file}}" class="avatar lazyload">
                                         </div>
 
                                     </ul>
@@ -214,7 +208,7 @@
                                 </div>
                             </div>
                         </article>
-                @endforeach
+                     @endforeach
 
                 <!-- Pagination -->
 
@@ -228,16 +222,13 @@
                         <h4 class="widget-title">جدید ترین مقالات</h4>
                         <ul class="post-list-small">
                             @foreach($endposts as $post)
-                                @php
-                                    $urlp=$post->image->file;
-                                    $picpost='storage/'.substr($urlp,'7');
-                                @endphp
+
                             <li class="post-list-small__item">
                                 <article class="post-list-small__entry clearfix">
                                     <div class="post-list-small__img-holder">
                                         <div class="thumb-container thumb-100">
                                             <a href="{{route('show',['post'=> $post->id])}}">
-                                                <img data-src="{{asset("$picpost")}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
+                                                <img data-src="{{$post->image->file}}" src="img/empty.png" alt="" class="post-list-small__img--rounded lazyload">
                                             </a>
                                         </div>
                                     </div>

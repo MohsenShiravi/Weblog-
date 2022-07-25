@@ -12,7 +12,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" method="post" action="{{route('posts.update',['post'=>$post->id])}}" >
+                            <form role="form" method="post" action="{{route('posts.update',['post'=>$post->id])}}" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">

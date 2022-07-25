@@ -38,7 +38,7 @@ class IndexController extends Controller
             ]);
         }
 
-        return redirect()->route('index');
+        return redirect()->back();
     }
     public function show(Post $post,User $user)
     {

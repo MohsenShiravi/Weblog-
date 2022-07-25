@@ -49,6 +49,7 @@
                                         {{$role->title}}
                                     @endforeach
                                 </p>
+                                        <img src="/{{$user->image->file}}" alt="نمایش تصویر کاربر" width="100" height="60">
                             </div>
                                     <p><a href="/profile/edit" class="px-2 btn-color">edit profile</a></p>
 
