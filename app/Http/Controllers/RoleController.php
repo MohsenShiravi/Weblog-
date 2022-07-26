@@ -23,7 +23,7 @@ class RoleController extends Controller
         $roles=$role->create([
             'title'=>$request->get('title'),
         ]);
-        $roles->users()->attach($request->get('users'));
+        //$roles->users()->attach($request->get('users'));
         return redirect()->route('roles.index');
     }
 

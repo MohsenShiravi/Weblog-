@@ -64,7 +64,6 @@
                                         <label class="form-check-label">منتشر شده</label>
                                     </div>
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
 

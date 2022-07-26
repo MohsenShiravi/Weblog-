@@ -31,6 +31,7 @@ public function create()
             'short_content'=>$request->get('short_content'),
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
+            'is_confirm'=>$request->get('is_confirm'),
             'user_id'=>Auth::id(),
             'status'=>$request->get('status'),
         ]);
@@ -54,16 +55,32 @@ public function create()
 
     public function index()
     {
+        $user=Auth::user();
+        if($user->hasRole('admin'))
+        {
+            $posts=Post::query()->with('category')->get();
+        }
+        else
+        {
+            $posts=Post::query()->where('user_id','=',Auth::id())->with('category')->get();
+        }
 
-
-        $posts = Post::query()->where('user_id',Auth::id())->get();
-        return view ('dashboard.posts.index',compact('posts'));
+        return view('admin.post.index',compact('posts','img_profile'));
     }
 
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        return view('dashboard.posts.edit',['post'=>$post,'categories'=>$categories,'tags'=>Tag::all()]);
+        $tags_ids=$post->GetTagIds();
+        return view('dashboard.posts.edit',
+            ['post'=>$post,
+                'categories'=>Category::all(),
+                'tags'=>Tag::all(),
+                'tags_ids'=>$tags_ids
+            ]);
+    }
+    public function DetailsPost(Post $post)
+    {
+        return view('dashboard.posts.detailspost',['post'=>$post]);
     }
 
     public function update(PostRequest $request , Post $post)
@@ -73,15 +90,24 @@ public function create()
             'short_content'=>$request->get('short_content'),
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
+            'is_confirm'=>$request->get('is_confirm'),
             'status'=>$request->get('status'),
         ]);
         $post->tags()->sync($request->get('tags'));
         return redirect()->route('posts.index');
     }
-    public function destroy(Post $post)
+
+    public function confirm(Request $request , Post $post)
+    {
+        $post->update([
+            'is_confirm' => $request->get('is_confirm')]);
+
+        return redirect()->route('posts.index');
+    }
+    public function destroy(Post $post,Image $image)
     {
         $post->tags()->detach();
-        $post->image()->detach();
+        $image->delete();
         $post->delete();
         return redirect()->route('posts.index');
     }

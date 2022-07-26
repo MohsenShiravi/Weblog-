@@ -146,6 +146,7 @@
                                         <p class="mb-0">{{$post->content}}</p>
                                     </div>
                                 </div>
+                            </div>
 
                                 <!-- Related Posts -->
 

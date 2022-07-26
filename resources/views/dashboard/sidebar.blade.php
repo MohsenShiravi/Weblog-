@@ -60,6 +60,8 @@
                         <p>نمایش عکس</p>
                     </a>
                 </li>
+                @foreach (auth()->user()->roles as $role)
+                @if ($role->title == 'admin')
                 <li class="nav-item">
                     <a href="{{route('roles.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -78,6 +80,8 @@
                         <p>اختصاص نقش به کاربر</p>
                     </a>
                 </li>
+                @endif
+                @endforeach
                 <li class="nav-item">
                     <a href="{{route('comments.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

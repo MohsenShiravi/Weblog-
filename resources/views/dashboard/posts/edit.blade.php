@@ -40,7 +40,14 @@
                                            @endforeach
                                         </select>
                                     </div>
-
+                                    <div class="form-row">
+                                        <label class="control-label" for="inputError"> تگ های مورد نظر را انتخاب کنید</label>
+                                        @foreach($tags as $tag)
+                                            <label for="" class="pr-4">
+                                                <input type="checkbox" name="tags[]" id="" {{@in_array($tag->id,$tags_ids)?'checked':''}} value="{{$tag->id}}">{{$tag->title}}
+                                            </label>
+                                        @endforeach
+                                    </div>
                                     <div class="form-group">
                                         <label class="control-label" for="inputError"> وضعیت انتشار</label>
                                         <div class="form-check">
@@ -52,7 +59,6 @@
                                             <label class="form-check-label">منتشر شده</label>
                                         </div>
                                     </div>
-
                                 </div>
                                 <!-- /.card-body -->
 

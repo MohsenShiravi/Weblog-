@@ -33,4 +33,9 @@ class Post extends Model
     {
         return $this->morphToMany(Tag::class,'taggable');
     }
+
+    public function GetTagIds()
+    {
+     return $this->tags()->pluck('id')->toArray();
+    }
 }

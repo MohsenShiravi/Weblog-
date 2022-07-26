@@ -49,6 +49,8 @@ Route::prefix('categories')->middleware(['auth'])->group(function (){
 
 Route::prefix('posts')->middleware(['auth'])->group(function (){
     Route::get('/',[PostController::class,'index'])->name('posts.index');
+    Route::get('/DetailsPost/{post}',[PostController::class,'DetailsPost'])->name('posts.DetailsPost');
+    Route::post('/confirm/{post}',[PostController::class,'confirm'])->name('posts.confirm');
     Route::get('/create',[PostController::class,'create'])->name('posts.create');
     Route::post('/store',[PostController::class,'store'])->name('posts.store');
     Route::get('/edit/{post}',[PostController::class,'edit'])->name('posts.edit');

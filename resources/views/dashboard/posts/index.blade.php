@@ -50,7 +50,7 @@
                                     @foreach($posts as $post)
 
 
-                           <tr>
+                           <tr class="@if($post->is_confirm==0) bg-danger @else bg-success @endif">
                                             <td>{{ $loop->iteration}}</td>
                                             <td>{{$post->title}}</td>
                                             <td>{{$post->short_content}}</td>
@@ -64,7 +64,11 @@
                                             <td><img width="50px" height="40px" src="{{$post->image->file}}"></td>
 
                                             <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
-
+                                                @foreach (auth()->user()->roles as $role)
+                                                @if ($role->title == 'admin')
+                                            <td><a href="{{route('posts.DetailsPost',['post'=> $post->id])}}" class="btn btn-sm btn-primary">اجازه</a>
+                                                @endif
+                                                @endforeach
                                                 <a href="{{route('posts.destroy',['post'=> $post->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
                                     @endforeach
