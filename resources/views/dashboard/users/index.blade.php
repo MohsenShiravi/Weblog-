@@ -49,9 +49,11 @@
                                             <td>{{ $loop->iteration}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            @foreach($user->roles as $role)
-                                            <td><ol><li>{{$role->title}}</li></ol></td>
-                                            @endforeach
+
+                                            <td>@foreach($user->roles as $post)
+                                                    {{($post->pivot->user_type)}}
+                                                @endforeach</td></td>
+
                                             <td><a href="{{route('users.show',['user'=> $user->id])}}" class="btn btn-sm btn-primary">اختصاص نقش</a>
 
                                         </tr>

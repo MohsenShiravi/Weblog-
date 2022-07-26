@@ -55,8 +55,8 @@ public function create()
 
     public function index()
     {
-        $user=Auth::user();
-        if($user->hasRole('admin'))
+
+        if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator'))
         {
             $posts=Post::query()->with('category')->get();
         }
@@ -65,7 +65,7 @@ public function create()
             $posts=Post::query()->where('user_id','=',Auth::id())->with('category')->get();
         }
 
-        return view('admin.post.index',compact('posts','img_profile'));
+        return view('dashboard.posts.index',compact('posts'));
     }
 
     public function edit(Post $post)

@@ -19,11 +19,18 @@ class UserController extends Controller
     public function show(User $user)
     {
         $roles=Role::all();
-        return view('dashboard.users.show',compact('user','roles'));
+        $find_role=$user->roles()->with('role');
+
+        return view('dashboard.users.show',compact('user','roles','find_role'));
     }
     public function store(Request $request ,User $user)
     {
-        $user->roles()->sync($request->get('roles'));
+        $role_id = $request->role_id;
+        $find_user_type=Role::query()->where('id',$role_id)->pluck('display_name')->first();
+
+        // $user->roles()->sync($request->get('roles'));
+        $user->roles()->sync([$role_id =>['user_type'=>$find_user_type]]);
+
         return redirect()->route('users.index');
     }
     public function update(Request $request)

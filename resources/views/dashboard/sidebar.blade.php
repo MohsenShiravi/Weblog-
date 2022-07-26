@@ -48,40 +48,15 @@
                         <p>ساخت پست جدید</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('images.create')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>اختصاص عکس</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('images.index')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>نمایش عکس</p>
-                    </a>
-                </li>
-                @foreach (auth()->user()->roles as $role)
-                @if ($role->title == 'admin')
-                <li class="nav-item">
-                    <a href="{{route('roles.create')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>ایجاد نقش</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('roles.index')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>لیست نقش ها</p>
-                    </a>
-                </li>
+                @if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator'))
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>اختصاص نقش به کاربر</p>
                     </a>
                 </li>
+
                 @endif
-                @endforeach
                 <li class="nav-item">
                     <a href="{{route('comments.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

@@ -13,8 +13,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $endposts=Post::latest()->take(3)->get();
-        $posts = Post::query()->where('status','=','published')->get();
+        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
+        $posts = Post::query()->where('is_confirm','1')->where('status','published')->get();
         $categories = Category::all();
         return view ('index',compact('posts','categories','endposts'));
     }
@@ -42,8 +42,8 @@ class IndexController extends Controller
     }
     public function show(Post $post,User $user)
     {
-        $comments=Comment::query()->where('post_id',$post->id)->where('is_confirm',1)->get();
-        $endposts=Post::latest()->take(3)->where('is_confirm',1)->get();;
+        $comments=Comment::query()->where('post_id',$post->id)->where('is_confirm','1')->get();
+        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
         $categories = Category::all();
         return view('show',['post'=>$post,'categories'=>$categories,'user'=>$user,'endposts'=>$endposts,'comments'=>$comments]);
     }
@@ -53,7 +53,7 @@ class IndexController extends Controller
         $posts = Post::query()
             ->where($field, 'LIKE', "%{$search}%")
             ->get();
-        $endposts=Post::latest()->take(3)->get();
+        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
         return view('search', compact('posts','endposts'));
     }
 }

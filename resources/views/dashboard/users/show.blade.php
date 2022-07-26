@@ -24,14 +24,12 @@
                                         <label for="exampleInputEmail1">عنوان </label>
                                         <input disabled type="text" value="{{old('name',$user->email)}}" name="title" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
                                     </div>
-                                <div class="form-row">
-                                    <label class="control-label" for="inputError">انتخاب نقش:</label>
-                                    @foreach($roles as $role)
-                                        <label for="" class="pr-4">
-                                            <input type="checkbox" name="roles[]" id="" value="{{$role->id}}">{{$role->title}}
-                                        </label>
-                                    @endforeach
-                                </div>
+                                    <select class="form-control" name="role_id" id="">
+                                        <option selected>--انتخاب کنید--</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->id}}" @if(in_array($role->id,$find_role->pluck('id')->toArray())) selected @endif>{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
                                 <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">ثبت</button>
                             </div>
