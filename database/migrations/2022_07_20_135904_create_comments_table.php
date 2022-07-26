@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
             $table->string('content');
-            $table->string('is_confirm')->default(1);
+            $table->string('is_confirm')->default('0');
+            $table->bigInteger('parent_id')->default(0);
             $table->timestamps();
         });
     }

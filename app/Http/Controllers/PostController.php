@@ -90,7 +90,7 @@ public function create()
             'short_content'=>$request->get('short_content'),
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
-            'is_confirm'=>$request->get('is_confirm'),
+            'is_confirm'=>'0',
             'status'=>$request->get('status'),
         ]);
         $post->tags()->sync($request->get('tags'));
