@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    public function sidebar()
+    {
+        $posts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
+        return view('layouts.master',compact('posts'));
+
+    }
 
 public function create()
 {

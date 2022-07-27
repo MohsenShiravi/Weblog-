@@ -13,14 +13,13 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
         $posts = Post::query()->where('is_confirm','1')->where('status','published')->get();
         $categories = Category::all();
-        return view ('index',compact('posts','categories','endposts'));
+        return view ('index',compact('posts','categories'));
     }
 
 
-    public function store(Request $request,)
+    public function store(Request $request)
     {
         if(auth()->user()){
             Comment::query()->create([
@@ -40,12 +39,11 @@ class IndexController extends Controller
 
         return redirect()->back();
     }
-    public function show(Post $post,User $user)
+    public function show(Post $post)
     {
         $comments=Comment::query()->where('post_id',$post->id)->where('is_confirm','1')->get();
-        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
         $categories = Category::all();
-        return view('show',['post'=>$post,'categories'=>$categories,'user'=>$user,'endposts'=>$endposts,'comments'=>$comments]);
+        return view('show',['post'=>$post,'categories'=>$categories,'comments'=>$comments]);
     }
     public function search(Request $request){
         $search = $request->input('search');
@@ -53,7 +51,6 @@ class IndexController extends Controller
         $posts = Post::query()
             ->where($field, 'LIKE', "%{$search}%")
             ->get();
-        $endposts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
-        return view('search', compact('posts','endposts'));
+        return view('search', compact('posts'));
     }
 }
