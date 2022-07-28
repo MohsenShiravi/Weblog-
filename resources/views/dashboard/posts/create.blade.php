@@ -32,7 +32,7 @@
                                     <textarea name="content" value="{{old('content')}}" class="form-control" rows="3" placeholder=" محتوا را وارد نمایید"></textarea>
                                 </div>
                                 <div class="box-widget">
-                                    <h5>تصویر شاخص</h5>
+                                    <h5>تصویر </h5>
                                     <input type="file" name="file">
                                 </div>
                                 <div class="form-group">

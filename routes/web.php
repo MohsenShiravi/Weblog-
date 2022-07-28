@@ -9,7 +9,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,14 +68,7 @@ Route::prefix('images')->middleware(['auth'])->group(function (){
     Route::get('/destroy/{image}',[ImageController::class,'destroy'])->name('images.destroy');
 });
 
-Route::prefix('roles')->group(function (){
-    Route::get('/',[RoleController::class,'index'])->name('roles.index');
-    Route::get('/create',[RoleController::class,'create'])->name('roles.create');
-    Route::post('/store',[RoleController::class,'store'])->name('roles.store');
-    Route::get('/edit/{role}',[RoleController::class,'edit'])->name('roles.edit');
-    Route::post('/update/{role}',[RoleController::class,'update'])->name('roles.update');
-    Route::get('/destroy/{role}',[RoleController::class,'destroy'])->name('roles.destroy');
-});
+
 Route::prefix('users')->group(function (){
     Route::get('/',[UserController::class,'index'])->name('users.index');
     Route::post('/store/{user}',[UserController::class,'store'])->name('users.store');

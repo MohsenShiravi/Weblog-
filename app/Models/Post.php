@@ -38,4 +38,10 @@ class Post extends Model
     {
      return $this->tags()->pluck('id')->toArray();
     }
+
+    public static function getLatestPosts()
+    {
+        return static::query()->latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
+
+    }
 }

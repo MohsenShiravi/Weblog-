@@ -1,4 +1,4 @@
-@extends('layouts.master_show')
+@extends('layouts.master')
 @section('title','تک پست')
 @section('content')
     <main class="main oh" id="main">
@@ -218,5 +218,7 @@
 
                     </div> <!-- end content box -->
                 </div> <!-- end post content -->
+    @include('layouts.sidebar')
+
 
 @endsection

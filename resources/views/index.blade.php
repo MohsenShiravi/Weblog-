@@ -211,4 +211,5 @@
                      @endforeach
                 <!-- Pagination -->
                 </div> <!-- end posts -->
+    @include('layouts.sidebar')
 @endsection

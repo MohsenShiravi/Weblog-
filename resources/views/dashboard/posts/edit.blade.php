@@ -12,9 +12,9 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" method="post" action="{{route('posts.update',['post'=>$post->id])}}" enctype="multipart/form-data" >
+                            <form role="form" method="post" action="{{route('posts.update',['post'=>$post->id])}}" enctype="multipart/form-data"  >
                                 @csrf
-                                <div class="card-body">
+                                <div class="card-body rtl" >
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">عنوان پست</label>
                                         <input type="text" value="{{old('title',$post->title)}}" name="title" class="form-control" id="exampleInputEmail1" placeholder="عنوان دسته بندی را وارد کنید">
@@ -47,7 +47,14 @@
                                                 <input type="checkbox" name="tags[]" id="" {{@in_array($tag->id,$tags_ids)?'checked':''}} value="{{$tag->id}}">{{$tag->title}}
                                             </label>
                                         @endforeach
-                                    </div>
+                                    </div><br><br>
+                                    <div class="box-widget">
+                                        <h5>ویرایش تصویر</h5>
+                                        <input type="file" name="file">
+                                        <img width="50px" height="40px" src="{{$post->image->file}}">
+                                    </div><br><br>
+
+
                                     <div class="form-group">
                                         <label class="control-label" for="inputError"> وضعیت انتشار</label>
                                         <div class="form-check">

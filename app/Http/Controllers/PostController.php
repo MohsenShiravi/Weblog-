@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function sidebar()
+    /*public function sidebar()
     {
         $posts=Post::latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
         return view('layouts.master',compact('posts'));
 
-    }
+    }*/
 
 public function create()
 {
@@ -99,6 +99,13 @@ public function create()
             'is_confirm'=>'0',
             'status'=>$request->get('status'),
         ]);
+        $file = $request['file'];
+
+        $img = $this->ImageUpload($file , 'files/');
+        Image::query()
+            ->where('imageable_id',$post->id)
+            ->where('imageable_type',Post::class)
+            ->update(['file'=>$img]);
         $post->tags()->sync($request->get('tags'));
         return redirect()->route('posts.index');
     }
