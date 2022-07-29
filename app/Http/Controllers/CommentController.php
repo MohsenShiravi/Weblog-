@@ -20,14 +20,61 @@ class CommentController extends Controller
         if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator')) {
             $comments=DB::table('comments')->select('comments.*','posts.title','users.name')
                 ->leftJoin('users','comments.user_id','=','users.id')
-                ->join('posts','posts.id','=','comments.post_id')->get();}
+                ->join('posts','posts.id','=','comments.commentable_id')->get();}
         else{
             $comments=DB::table('comments')->select('comments.*','posts.title','users.name')
                 ->leftJoin('users','comments.user_id','=','users.id')
-                ->join('posts','posts.id','=','comments.post_id')
+                ->join('posts','posts.id','=','comments.commentable_id')
                 ->where('posts.user_id','=',Auth::id())->get();
         }
         return view('dashboard.comments.index',compact('comments'));
+    }
+    public function store(Request $request)
+    {
+        if(Auth::user()){
+            Comment::query()->create([
+                'commentable_id'=>$request->get('post_id'),
+                'commentable_type'=>Post::class,
+                'user_id'=>Auth::id(),
+                'content'=>$request->get('content'),
+            ]);}
+        else{
+            Comment::query()->create([
+                'commentable_id'=>$request->get('post_id'),
+                'commentable_type'=>Post::class,
+                'author_name'=>$request->get('author_name'),
+                'mobile'=>$request->get('mobile'),
+                'email'=>$request->get('email'),
+                'content'=>$request->get('content'),
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function replay(Request $request)
+    {
+        if(Auth::user()){
+            Comment::query()->create([
+                'commentable_id'=>$request->get('post_id'),
+                'commentable_type'=>Post::class,
+                'user_id'=>Auth::id(),
+                'content'=>$request->get('content'),
+                'parent_id'=>$request->get('parent_id')
+            ]);}
+        else{
+            Comment::query()->create([
+                'commentable_id'=>$request->get('post_id'),
+                'commentable_type'=>Post::class,
+                'author_name'=>$request->get('author_name'),
+                'mobile'=>$request->get('mobile'),
+                'email'=>$request->get('email'),
+                'content'=>$request->get('content'),
+                'parent_id'=>$request->get('parent_id')
+            ]);
+        }
+
+        return redirect()->back();
     }
 
     public function edit(Comment $comment)

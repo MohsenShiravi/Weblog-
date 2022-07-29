@@ -35,7 +35,6 @@ require __DIR__.'/auth.php';
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 Route::get('/show/{post}', [IndexController::class, 'show'])->name('show');
 Route::get('/search/',[IndexController::class,'search'])->name('search');
-Route::post('/store',[IndexController::class,'store'])->name('comments.store');
 
 Route::prefix('categories')->middleware(['auth'])->group(function (){
     Route::get('/',[CategoryController::class,'index'])->name('categories.index');
@@ -76,6 +75,8 @@ Route::prefix('users')->group(function (){
 });
 Route::prefix('comments')->group(function (){
     Route::get('index',[CommentController::class,'index'])->name('comments.index');
+    Route::post('/store',[CommentController::class,'store'])->name('comments.store');
+    Route::post('/comment_replies',[CommentController::class,'replay'])->name('comments.replay');
     Route::get('/edit/{comment}',[CommentController::class,'edit'])->name('comments.edit');
     Route::post('/update/{comment}',[CommentController::class,'update'])->name('comments.update');
     Route::get('/destroy/{comment}',[CommentController::class,'destroy'])->name('comments.destroy');

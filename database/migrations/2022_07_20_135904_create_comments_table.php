@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id');
             $table->foreignId('user_id')->nullable();
-            $table->string('auther_name')->nullable();
+            $table->string('author_name')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
             $table->string('content');
             $table->string('is_confirm')->default('0');
             $table->bigInteger('parent_id')->default(0);
+            $table->morphs('commentable');
             $table->timestamps();
         });
     }

@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{$comment->title}}</td>
-                                    <td>@if(isset($comment->auther_name)){{$comment->auther_name}}@else{{$comment->name}} @endif</td>
+                                    <td>@if(isset($comment->author_name)){{$comment->author_name}}@else{{$comment->name}} @endif</td>
                                     <td>{{$comment->content}}</td>
                                     <td>@if($comment->is_confirm == 1)منتشر شده@else($comment->is_confirm == 0)منتشر نشده@endif</td>
                                     <td><a href="{{route('comments.edit',['comment'=> $comment->id])}}" class="btn btn-sm btn-primary">اجازه انتشار</a>

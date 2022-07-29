@@ -15,8 +15,18 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function commentable()
+    {
+        return $this->morphTo();
+}
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Comment::class,'parent_id')->where('is_confirm','1');
+
     }
 }

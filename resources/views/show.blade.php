@@ -154,71 +154,67 @@
                         </article> <!-- end standard post -->
 
                         <!-- Comments -->
-                        <div class="entry-comments">
-                            <div class="title-wrap title-wrap--line">
-                                <h3 class="section-title">نظرات </h3>
-                                @foreach($comments as $comment)
-                            </div>
-                            <ul class="comment-list">
-                                <li class="comment">
-                                    <div class="comment-body">
 
-                                        <div class="comment-text">
-
-                                            @if(isset($comment->auther_name))<h6 class="comment-author">{{$comment->auther_name}}@else{{$comment->user->name}} @endif</h6>
-
-                                            <p>{{$comment->content}}</p>
-                                            <a href="#" class="comment-reply">پاسخ</a>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-
-                            </ul>
-                        </div> <!-- end comments -->
-
-                        <!-- Comment Form -->
+                    <!-- Comment Form -->
                         <div id="respond" class="comment-respond">
                             <div class="title-wrap">
                                 <h5 class="comment-respond__title section-title">دیدگاه شما</h5>
                             </div>
 
-
                             <form id="form" class="comment-form" method="post" action="{{route('comments.store')}}">
                                 @csrf
                                 <input name="post_id"  type="hidden" value="{{$post->id}}">
                                 <p class="comment-form-comment">
-                                    <label >دیدگاه</label>
+                                    <label ><h1>نظرتان را بیان نمایید:</h1></label>
                                     <textarea  name="content" rows="5" required="required"></textarea>
                                 </p>
 
                                 @if(!auth()->user())
 
-                                <div class="row row-20">
-                                    <div class="col-lg-4">
-                                        <label >نام</label>
-                                        <input name="auther_name"  type="text">
+                                    <div class="row row-20">
+                                        <div class="col-lg-4">
+                                            <label >نام</label>
+                                            <input name="author_name"  type="text">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>ایمیل: </label>
+                                            <input name="email"  type="email">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label >موبایل:</label>
+                                            <input name="mobile"  type="text">
+                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <label>ایمیل: </label>
-                                        <input name="email"  type="email">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label >موبایل:</label>
-                                        <input name="mobile"  type="text">
-                                    </div>
-                                </div>
                                 @endif
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">ثبت</button>
+                                    <button type="submit" class="btn note-btn-fontname">ثبت</button>
                                 </div>
+                                @include('comment_replies', [ 'comments' => $comments , 'post' => $post])
 
                             </form>
                         </div> <!-- end comment form -->
 
                     </div> <!-- end content box -->
+
                 </div> <!-- end post content -->
+            </div>
+        </div>
+    </main>
+
     @include('layouts.sidebar')
-
-
+@endsection
+@section('page_script')
+<script>
+    $(document).ready(function () {
+        $(".replay-button").click(function (){
+            var comment_id=$(this).attr('data-comment-id');
+            $("#replaybox-"+ comment_id).css("display","block");
+        });
+        $(".cancel-button").click(function (e){
+            e.preventDefault();
+            var comment_id=$(this).attr('data-comment-id');
+            $("#replaybox-"+ comment_id).css("display","none");
+        });
+    });
+</script>
 @endsection

@@ -132,5 +132,5 @@
 <script src="{{asset('front/js/scripts.js')}}"></script>
 
 </body>
-
+@yield('page_script')
 </html>

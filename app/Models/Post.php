@@ -17,16 +17,16 @@ class Post extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function tags()

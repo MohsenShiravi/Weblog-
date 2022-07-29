@@ -14,18 +14,18 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        return view('dashboard.profile.show',['user'=>auth()->user()]);
+        return view('dashboard.profile.show',['user'=>Auth::user()]);
     }
 
     public function edit()
     {
-        return view('dashboard.profile.edit',['user'=>auth()->user()]);
+        return view('dashboard.profile.edit',['user'=>Auth::user()]);
     }
 
     public function update(Request $request)
     {
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         $user->update([
             'name' => $request->get('name', $user->name),
