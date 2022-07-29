@@ -2,13 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
-class ViewServiceProvider extends ServiceProvider
+class UserServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -27,10 +25,13 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       View::composer('layouts.sidebar',function ($view){
-            $view->with('user',User::getUserPosts());
-
-        });
+        {
+            View::composer('dashboard.layout.sidebar', function ($view) {
+                $view->with('user', User::getUserPosts());
+            });
+        }
     }
-
 }
+
+
+

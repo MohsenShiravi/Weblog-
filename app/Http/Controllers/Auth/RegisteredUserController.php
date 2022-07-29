@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $img='img/user.png';
+        $img='img/user.jpg';
         $image=new Image();
         $image->file=$img;
         $image->imageable_id=$user->id;

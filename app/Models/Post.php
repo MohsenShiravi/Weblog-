@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -44,4 +45,5 @@ class Post extends Model
         return static::query()->latest()->take(3)->where('is_confirm','1')->where('status','published')->get();
 
     }
+
 }

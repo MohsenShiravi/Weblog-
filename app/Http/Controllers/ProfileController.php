@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
             $file = $request['file'];
 
-            $img = $this->ImageUpload($file , 'files/');
+            $img = $this->ImageUpload($file , 'images/');
             Image::query()
             ->where('imageable_id',$user->id)
             ->where('imageable_type',User::class)

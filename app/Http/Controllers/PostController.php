@@ -43,10 +43,10 @@ public function create()
         ]);
         if ($request['file']){
             $file = $request['file'];
-            $img = $this->ImageUpload($file , 'files/');
+            $img = $this->ImageUpload($file , 'images/');
         }
         else {
-            $img = 'files/default.jpg';
+            $img = 'images/user.jpg';
         }
         $post=Post::query()->find($posts->id);
         $image=new Image();
@@ -101,7 +101,7 @@ public function create()
         ]);
         $file = $request['file'];
 
-        $img = $this->ImageUpload($file , 'files/');
+        $img = $this->ImageUpload($file , 'images/');
         Image::query()
             ->where('imageable_id',$post->id)
             ->where('imageable_type',Post::class)
