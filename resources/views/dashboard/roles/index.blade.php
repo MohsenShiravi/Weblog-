@@ -32,47 +32,23 @@
 
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table">
                                     <thead>
                                     <tr>
                                         <th>ردیف</th>
-                                        <th>نام </th>
-                                        <th>محتوای کوتاه </th>
-                                        <th>محتوا </th>
-                                        <th>دسته بندی</th>
-                                        <th>وضعیت</th>
-                                        <th>نام نویسنده</th>
-                                        <th>تصویر پست</th>
+                                        <th>نام نقش</th>
                                         <th>عملیات</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @foreach($posts as $post)
-
-
-                           <tr class="@if($post->is_confirm==0) bg-danger @else bg-success @endif">
+                                    @foreach($roles as $role)
+                                        <tr>
                                             <td>{{ $loop->iteration}}</td>
-                                            <td>{{$post->title}}</td>
-                                            <td>{{$post->short_content}}</td>
-                                            <td>{{$post->content}}</td>
+                                            <td>{{$role->name}}</td>
+                                            <td><a href="{{route('roles.edit',['role'=> $role->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
 
-                                            <td>{{$post->category->title}}</td>
-
-                                            <td>{{$post->status}}</td>
-                                            <td>{{$post->user->name}}</td>
-
-                                            <td><img width="50px" height="40px" src="{{$post->image->file}}"></td>
-
-                                            <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
-                               @if(Auth::user()->hasRole('admin'))
-
-                               <td><a href="{{route('posts.DetailsPost',['post'=> $post->id])}}" class="btn btn-sm btn-primary">اجازه</a>
-                                                @endif
-
-                                                <a href="{{route('posts.destroy',['post'=> $post->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>
+                                                <a href="{{route('roles.destroy',['role'=> $role->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
                                     @endforeach
-                                    </tbody>
                                 </table>
                             </div>
                             <!-- /.card-body -->

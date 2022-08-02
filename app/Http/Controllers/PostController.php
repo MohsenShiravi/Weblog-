@@ -62,7 +62,7 @@ public function create()
     public function index()
     {
 
-        if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator'))
+        if(Auth::user()->hasRole('admin'))
         {
             $posts=Post::query()->with('category')->get();
         }

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use function Symfony\Component\Mime\Header\all;
-
+use Illuminate\Support\Facades\Gate;
 class CategoryController extends Controller
 {
     public function create()
     {
+        if (!Gate::allows('create-category')){
+            return abort(403);
+        }
         return view('dashboard.categories.create');
     }
 
@@ -24,12 +25,18 @@ class CategoryController extends Controller
 
     public function index()
     {
+        Gate::authorize('read-category');
+
         $categories = Category::all();
         return view('dashboard.categories.index',compact('categories'));
     }
 
     public function edit(Category $category)
     {
+        if (!Gate::allows('edit-category',$category)){
+            return abort(403);
+        }
+
         return view('dashboard.categories.edit',compact('category'));
     }
 
@@ -41,6 +48,8 @@ class CategoryController extends Controller
     }
     public function destroy(Category $category)
     {
+        Gate::authorize('delete-category',$category);
+
         $category->delete();
         return redirect()->route('categories.index');
     }

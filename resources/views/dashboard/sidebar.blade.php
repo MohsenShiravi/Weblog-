@@ -41,7 +41,19 @@
                         <p>ساخت پست جدید</p>
                     </a>
                 </li>
-                @if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator'))
+                @if(Auth::user()->hasRole('admin'))
+                    <li class="nav-item">
+                        <a href="{{route('roles.index')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>لیست نقش ها</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('roles.create')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>ساخت نقش جدید</p>
+                        </a>
+                    </li>
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

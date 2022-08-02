@@ -62,9 +62,5 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public static function getUserPosts()
-    {
-        return Auth::user();
 
-    }
 }

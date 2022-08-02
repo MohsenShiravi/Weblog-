@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,14 @@ Route::prefix('comments')->group(function (){
     Route::get('/edit/{comment}',[CommentController::class,'edit'])->name('comments.edit');
     Route::post('/update/{comment}',[CommentController::class,'update'])->name('comments.update');
     Route::get('/destroy/{comment}',[CommentController::class,'destroy'])->name('comments.destroy');
+});
+Route::prefix('roles')->group(function (){
+    Route::get('/',[RoleController::class,'index'])->name('roles.index');
+    Route::get('/create',[RoleController::class,'create'])->name('roles.create');
+    Route::post('/store',[RoleController::class,'store'])->name('roles.store');
+    Route::get('/edit/{role}',[RoleController::class,'edit'])->name('roles.edit');
+    Route::post('/update/{role}',[RoleController::class,'update'])->name('roles.update');
+    Route::get('/destroy/{role}',[RoleController::class,'destroy'])->name('roles.destroy');
 });
 Route::get('tags/show',[TagController::class, 'show'])->name('tags.show');
 Route::get('/profile',[ProfileController::class, 'show'])->name('profile.show');

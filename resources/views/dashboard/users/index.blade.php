@@ -50,8 +50,8 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
 
-                                            <td>@foreach($user->roles as $post)
-                                                    {{($post->pivot->user_type)}}
+                                            <td>@foreach($user->roles as $role)
+                                                    {{($role->name)}}
                                                 @endforeach</td></td>
 
                                             <td><a href="{{route('users.show',['user'=> $user->id])}}" class="btn btn-sm btn-primary">اختصاص نقش</a>
