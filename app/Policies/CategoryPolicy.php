@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Laratrust\Models\LaratrustPermission;
-
+use Illuminate\Auth\Access\Response;
 class CategoryPolicy
 {
     use HandlesAuthorization;
@@ -19,7 +19,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role->hasPermission('read-category');
+        return $user->hasPermission('read-category');
     }
 
     /**
@@ -42,7 +42,8 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        return $user->role->hasPermission('create-category');
+        return $user->hasPermission('create-category');
+
     }
 
     /**
@@ -54,7 +55,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category)
     {
-        $isAuthorized = $user->role->hasPermission('update-category')
+        $isAuthorized = $user->hasPermission('update-category')
             && !empty($category);
 
         return $isAuthorized
@@ -71,7 +72,7 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category)
     {
-        return $user->role->hasPermission('delete-category')
+        return $user->hasPermission('delete-category')
             && !empty($category)
             && $category->posts()->count() == 0;
     }

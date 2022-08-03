@@ -17,6 +17,8 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
+        Gate::authorize('create-category');
+
         Category::query()->create([
             'title'=>$request->get('title'),
         ]);
@@ -42,6 +44,8 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request , Category $category)
     {
+        Gate::authorize('update-category',$category);
+
         $category->title=$request->title;
         $category->save();
         return redirect()->route('categories.index');
