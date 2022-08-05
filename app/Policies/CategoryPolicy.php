@@ -19,7 +19,9 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermission('read-category');
+        return $user->hasPermission('read-category')
+            ? Response::allow()
+            : Response::deny('دسترسی نمایش دسته بندی ها برای شما غیرفعال می باشد');;
     }
 
     /**
@@ -42,7 +44,9 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermission('create-category');
+        return $user->hasPermission('create-category')
+             ? Response::allow()
+            : Response::deny('شما مجاز به ایجاد دسته بندی نیستید');
 
     }
 
@@ -60,7 +64,7 @@ class CategoryPolicy
 
         return $isAuthorized
             ? Response::allow()
-            : Response::deny('شما مجاز نیستید');
+            : Response::deny('شما مجاز به ویرایش دسته بندی ها نیستید');
     }
 
     /**
@@ -74,7 +78,9 @@ class CategoryPolicy
     {
         return $user->hasPermission('delete-category')
             && !empty($category)
-            && $category->posts()->count() == 0;
+            && $category->posts()->count() == 0
+            ? Response::allow()
+            : Response::deny('شما مجاز به حذف دسته بندی ها نیستید');;
     }
 
     /**

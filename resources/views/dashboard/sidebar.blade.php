@@ -42,12 +42,7 @@
                     </a>
                 </li>
                 @if(Auth::user()->hasRole('admin'))
-                    <li class="nav-item">
-                        <a href="{{route('roles.index')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>لیست نقش ها</p>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="{{route('roles.create')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -60,7 +55,12 @@
                         <p>اختصاص نقش به کاربر</p>
                     </a>
                 </li>
-
+                    <li class="nav-item">
+                        <a href="{{route('roles.index')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>اختصاص دسترسی به کاربر</p>
+                        </a>
+                    </li>
                 @endif
                 <li class="nav-item">
                     <a href="{{route('comments.index')}}" class="nav-link">

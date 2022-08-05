@@ -9,15 +9,13 @@ class CategoryController extends Controller
 {
     public function create()
     {
-        if (!Gate::allows('create-category')){
-            return abort(403);
-        }
+        Gate::authorize('create-category');
+
         return view('dashboard.categories.create');
     }
 
     public function store(CategoryRequest $request)
     {
-        Gate::authorize('create-category');
 
         Category::query()->create([
             'title'=>$request->get('title'),
@@ -35,16 +33,14 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        if (!Gate::allows('edit-category',$category)){
-            return abort(403);
-        }
+        Gate::authorize('edit-category',$category);
+
 
         return view('dashboard.categories.edit',compact('category'));
     }
 
     public function update(CategoryRequest $request , Category $category)
     {
-        Gate::authorize('update-category',$category);
 
         $category->title=$request->title;
         $category->save();

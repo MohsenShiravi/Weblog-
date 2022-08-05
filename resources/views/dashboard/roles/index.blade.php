@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration}}</td>
                                             <td>{{$role->name}}</td>
-                                            <td><a href="{{route('roles.edit',['role'=> $role->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
+                                            <td><a href="{{route('roles.edit',['role'=> $role->id])}}" class="btn btn-sm btn-primary">اختصاص دسترسی</a>
 
                                                 <a href="{{route('roles.destroy',['role'=> $role->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
