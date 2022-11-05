@@ -31,6 +31,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">تاریخ</label>
+                                        <input type="text" name="done_at" value="{{old('done_at',$post->done_at)}}" class="example1">
+                                    </div>
+
+                                    <div class="form-group">
                                         <label>نام دسته بندی</label>
                                         <select name="category_id" class="form-control">
                                             <option> انتخاب کنید:</option>
@@ -51,7 +56,7 @@
                                     <div class="box-widget">
                                         <h5>ویرایش تصویر</h5>
                                         <input type="file" name="file">
-                                        <img width="50px" height="40px" src="{{$post->image->file}}">
+
                                     </div><br><br>
 
 

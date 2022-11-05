@@ -145,6 +145,11 @@
                                         </h6>
                                         <p class="mb-0">{{$post->content}}</p>
                                     </div>
+                                    <div>
+                                        @foreach($post->tags as $tag)
+                                    <span class="badge-pill">{{$tag->title}}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
 

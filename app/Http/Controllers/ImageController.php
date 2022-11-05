@@ -26,7 +26,7 @@ class ImageController extends Controller
             $complatefilename=$request->file('file')->getClientOriginalName();
             $filename=pathinfo($complatefilename,PATHINFO_FILENAME);
             $extention=$request->file('file')->getClientOriginalExtension();
-            $compPic=str_replace(' ','_',$filename).'-'.rand().'_'.time().'.'.$extention;
+            $compPic=str_replace(' ','_',$filename).'_'.time().'.'.$extention;
             $path=$request->file('file')->storeAs($savefolder,$compPic);
 
         }

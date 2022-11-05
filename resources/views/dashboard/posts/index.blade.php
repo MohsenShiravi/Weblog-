@@ -41,6 +41,7 @@
                                         <th>محتوا </th>
                                         <th>دسته بندی</th>
                                         <th>وضعیت</th>
+                                        <th>تاریخ</th>
                                         <th>نام نویسنده</th>
                                         <th>تصویر پست</th>
                                         <th>عملیات</th>
@@ -48,28 +49,26 @@
                                     </thead>
                                     <tbody>
                                     @foreach($posts as $post)
-
-
+                                         @php
+                                             $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($post->done_at));
+                                             $done_at=\Morilog\Jalali\CalendarUtils::convertNumbers($date);
+                                         @endphp
                            <tr class="@if($post->is_confirm==0) bg-danger @else bg-success @endif">
-                                            <td>{{ $loop->iteration}}</td>
-                                            <td>{{$post->title}}</td>
-                                            <td>{{$post->short_content}}</td>
-                                            <td>{{$post->content}}</td>
-
-                                            <td>{{$post->category->title}}</td>
-
-                                            <td>{{$post->status}}</td>
-                                            <td>{{$post->user->name}}</td>
-
-                                            <td><img width="50px" height="40px" src="{{$post->image->file}}"></td>
-
-                                            <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
+                               <td>{{ $loop->iteration}}</td>
+                               <td>{{$post->title}}</td>
+                               <td>{{$post->short_content}}</td>
+                               <td>{{$post->content}}</td>
+                               <td>{{$post->category->title}}</td>
+                               <td>{{$post->status}}</td>
+                               <td>{{$done_at}}</td>
+                               <td>{{$post->user->name}}</td>
+                               <td><img width="50px" height="40px" src="{{$post->image->file}}"></td>
+                               <td><a href="{{route('posts.edit',['post'=> $post->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
                                @if(Auth::user()->hasRole('admin'))
-
-                               <td><a href="{{route('posts.DetailsPost',['post'=> $post->id])}}" class="btn btn-sm btn-primary">اجازه</a>
-                                                @endif
-
-                                                <a href="{{route('posts.destroy',['post'=> $post->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a></td>
+                                   <td><a href="{{route('posts.DetailsPost',['post'=> $post->id])}}" class="btn btn-sm btn-primary">اجازه</a>
+                                       @endif
+                                       <a href="{{route('posts.destroy',['post'=> $post->id])}}" onclick="return confirm('آیا مطمئن هستید؟')" class="btn btn-sm btn-danger">حذف</a>
+                                   </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

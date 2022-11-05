@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Morilog\Jalali\CalendarUtils;
 
 class PostController extends Controller
 {
@@ -38,6 +39,7 @@ public function create()
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
             'is_confirm'=>$request->get('is_confirm'),
+            'done_at'=>$this->convertDate($request->get('done_at')),
             'user_id'=>Auth::id(),
             'status'=>$request->get('status'),
         ]);
@@ -54,8 +56,10 @@ public function create()
         $image->imageable_id=$post->id;
         $image->imageable_type=Post::class;
         $image->save();
+if ($request->has('tags')){
+    $posts->tags()->attach($request->get('tags'));
+}
 
-        $posts->tags()->attach($request->get('tags'));
         return redirect()->route('posts.index');
     }
 
@@ -77,11 +81,13 @@ public function create()
     public function edit(Post $post)
     {
         $tags_ids=$post->GetTagIds();
+        $done_at=$this->convertToMiladi($post->done_at);
         return view('dashboard.posts.edit',
             ['post'=>$post,
                 'categories'=>Category::all(),
                 'tags'=>Tag::all(),
-                'tags_ids'=>$tags_ids
+                'tags_ids'=>$tags_ids,
+                'done_at'=>$done_at,
             ]);
     }
     public function DetailsPost(Post $post)
@@ -96,6 +102,7 @@ public function create()
             'short_content'=>$request->get('short_content'),
             'content'=>$request->get('content'),
             'category_id'=>$request->get('category_id'),
+            'done_at'=>$this->convertDate($request->get('done_at')),
             'is_confirm'=>'0',
             'status'=>$request->get('status'),
         ]);
@@ -120,7 +127,7 @@ public function create()
     public function destroy(Post $post,Image $image)
     {
         $post->tags()->detach();
-        $image->delete();
+        $post->image->delete();
         $post->delete();
         return redirect()->route('posts.index');
     }

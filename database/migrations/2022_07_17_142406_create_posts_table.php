@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->enum('status',['draft', 'published']);
             $table->enum('is_confirm',['0','1'])->nullable();
+            $table->timestamp('done_at');
             $table->timestamps();
         });
     }

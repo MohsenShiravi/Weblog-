@@ -14,6 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('persian-datepicker/persian-datepicker.min.css')}}"/>
+
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -189,5 +191,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+<script src="{{asset('persian-datepicker/persian-date.min.js')}}"></script>
+<script src="{{asset('persian-datepicker/persian-datepicker.min.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".example1").pDatepicker();
+        $(".example1").persianDatepicker({ observer:true, inputDelay:0, autoClose: true,format: 'YYYY-MM-DD',responsive:true });
+
+    });
+</script>
 </body>
 </html>

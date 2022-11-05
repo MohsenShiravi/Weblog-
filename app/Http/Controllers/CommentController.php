@@ -17,7 +17,7 @@ class CommentController extends Controller
 
     public function index()
     {
-        if(Auth::user()->hasRole('superadministrator') or Auth::user()->hasRole('administrator')) {
+        if(Auth::user()->hasRole('admin')) {
             $comments=DB::table('comments')->select('comments.*','posts.title','users.name')
                 ->leftJoin('users','comments.user_id','=','users.id')
                 ->join('posts','posts.id','=','comments.commentable_id')->get();}

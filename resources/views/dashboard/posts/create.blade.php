@@ -23,6 +23,10 @@
                                     <input type="text" name="title" value="{{old('title')}}" class="form-control" id="exampleInputEmail1" placeholder="عنوان پست را وارد کنید">
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">تاریخ</label>
+                                    <input type="text" name="done_at"  class="example1">
+                                </div>
+                                <div class="form-group">
                                     <label>خلاصه محتوا</label>
                                     <textarea name="short_content" value="{{old('short_content')}}" class="form-control" rows="3" placeholder="خلاصه محتوا را وارد نمایید"></textarea>
                                 </div>
